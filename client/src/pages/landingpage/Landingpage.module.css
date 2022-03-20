@@ -1,0 +1,33 @@
+.landing-page {
+  background-image: url("../../img/Pokemon\ Pikachu\ Wallpaper\ 1920x1080\ Pokemon\ Pikachu.jpg");
+  background-size: contain;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 60px;
+  justify-content: left;
+}
+
+.buttonBox {
+  border: 8px solid #a04d23;
+  width: 300px;
+  height: 150px;
+  margin-left: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+}
+.text {
+  font-size: 40px;
+  color: white;
+}
+
+.link:link,
+.link:visited {
+  text-decoration: none;
+  color: white;
+}
+.link:hover {
+  color: #d6552e;
+}
