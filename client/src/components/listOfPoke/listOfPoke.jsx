@@ -1,22 +1,14 @@
-import {useEffect} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {getPokes} from "../../redux/actions/index";
-import CardPoke from "../cardPoke/cardPoke";
-import Loading from "../loading/loading";
-const ListOfPoke = () => {
-  const pokemons = useSelector(state => state.pokemonsLoaded);
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getPokes());
-  }, [dispatch]);
+import {useSelector} from "react-redux";
 
+import styles from "./listOfPoke.module.css";
+import CardPoke from "../cardPoke/cardPoke";
+const ListOfPoke = () => {
+  const pokemons = useSelector(state => state.pokeCopy);
   return (
-    <div>
-      {pokemons.length ? (
-        pokemons.map(poke => <CardPoke key={poke.id} {...poke} />)
-      ) : (
-        <Loading />
-      )}
+    <div className={styles.container}>
+      {pokemons.map(poke => (
+        <CardPoke key={poke.id} {...poke} />
+      ))}
     </div>
   );
 };

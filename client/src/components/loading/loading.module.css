@@ -1,0 +1,46 @@
+.container {
+  max-height: 100%;
+  text-align: center;
+  position: absolute;
+  margin-top: 5%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.img {
+  width: auto;
+  height: 20rem;
+}
+.text {
+  position: relative;
+  display: inline-block;
+  font-size: 5rem;
+  text-transform: uppercase;
+  border-bottom: 1rem solid;
+  color: white;
+  margin-left: auto;
+  margin-right: auto;
+}
+.text::before {
+  content: attr(data-text);
+  position: absolute;
+  font-size: 5rem;
+  border-bottom: 1rem solid;
+  top: 0;
+  left: 0;
+  width: 100%;
+  color: #ebb800;
+  overflow: hidden;
+  animation: animate 10s linear infinite;
+}
+
+@keyframes animate {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}

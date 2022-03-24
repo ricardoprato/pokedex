@@ -1,0 +1,118 @@
+.container {
+  padding-top: 1rem;
+  position: relative;
+  border-radius: 1rem;
+  background-color: white;
+  display: grid;
+  box-shadow: 0.6rem 0.6rem 4rem #e9e8e7;
+  text-align: center;
+  grid-template-areas:
+    ". img ."
+    ". name ."
+    ". type .";
+  height: 12rem;
+}
+.containerWidth {
+  width: 60%;
+}
+.stats {
+  padding-top: 1rem;
+  border-radius: 1rem;
+  box-shadow: 0.6rem 0.6rem 4rem #e9e8e7;
+  width: 80%;
+  height: 12rem;
+  grid-area: stats;
+  display: flex;
+}
+.statsText {
+  padding: 2rem 1rem;
+  text-align: right;
+  display: inline-block;
+}
+.mainText {
+  text-transform: capitalize;
+  color: #66625c;
+  grid-area: name;
+  font-size: 1.5rem;
+  margin-top: -1rem;
+  line-height: 1.2;
+}
+.types {
+  text-transform: uppercase;
+  grid-area: type;
+  font-weight: bold;
+  list-style: none;
+  margin-left: 1rem;
+  display: flex;
+  justify-content: space-evenly;
+  margin: 0;
+  padding: 0.1px;
+}
+.img {
+  grid-area: img;
+  margin-left: auto;
+  margin-right: auto;
+  max-height: 5rem;
+}
+.circle {
+  border-radius: 50%;
+  display: grid;
+  background-color: white;
+  place-content: center;
+  box-shadow: 0.6rem 0.6rem 4rem #e9e8e7;
+  position: absolute;
+  width: 4rem;
+  height: 4rem;
+}
+.height {
+  right: -1.5rem;
+  top: -1.5rem;
+}
+.weight {
+  left: -1.5rem;
+  top: -1.5rem;
+}
+.progress,
+.progress::-webkit-progress-bar {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-color: #e6e6e6;
+  border-radius: 2rem;
+  height: 0.5rem;
+  position: relative;
+  width: 100%;
+  border: none;
+  margin: 0;
+}
+::-webkit-progress-value {
+  background: linear-gradient(to left, #f2709c, #ff9472);
+  box-shadow: 0 3px 3px -5px #f2709c, 0 2px 5px #f2709c;
+  border-radius: 2rem;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 0;
+  transition: 1s ease 0.3s;
+}
+.progress::-moz-progress-bar {
+  background: linear-gradient(to left, #f2709c, #ff9472);
+  box-shadow: 0 3px 3px -5px #f2709c, 0 2px 5px #f2709c;
+  border-radius: 2rem;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 0;
+  transition: 1s ease 0.3s;
+}
+.progressDiv {
+  padding: 2.5rem 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  width: 60%;
+  margin: 0;
+}

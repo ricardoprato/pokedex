@@ -1,0 +1,9 @@
+.container {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  grid-template: "card  stats";
+  grid-template-columns: repeat(2, 1fr);
+  grid-column-gap: 2rem;
+  padding: 4rem;
+}

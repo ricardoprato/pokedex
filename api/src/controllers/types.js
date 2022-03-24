@@ -6,7 +6,13 @@ const getTypesDb = async (req, res, next) => {
     const typesDb = await getTypes();
     res.send(typesDb);
   } catch (err) {
-    next(err);
+    if (err.response) {
+      res.status(err.response.status).send({msg: err.response.status});
+    } else if (err.request) {
+      next(err.request);
+    } else {
+      next(err);
+    }
   }
 };
 

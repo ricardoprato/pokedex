@@ -22,8 +22,7 @@ const getAllPoke = async url => {
           height: p.value.data.height,
           weight: p.value.data.weight,
           types: p.value.data.types.map(t => t.type.name),
-          img: p.value.data.sprites.versions["generation-v"]["black-white"]
-            .animated.front_default,
+          img: p.value.data.sprites.other.dream_world.front_default,
         };
       });
     return pokemon;
@@ -75,21 +74,51 @@ const getSinglePoke = async id => {
       const {dataValues} = await Pokemon.findByPk(newId, {
         include: {model: Type},
       });
-      const poke = {
-        id: dataValues.id + "DB",
-        name: dataValues.name,
-        hp: dataValues.hp,
-        attack: dataValues.attack,
-        defense: dataValues.defense,
-        speed: dataValues.speed,
-        height: dataValues.height,
-        weight: dataValues.weight,
-        types: dataValues.types.map(t => t.name),
-        img: dataValues.img,
-      };
-      return poke;
+      if (dataValues?.id) {
+        const poke = {
+          id: dataValues.id + "DB",
+          name: dataValues.name,
+          hp: dataValues.hp,
+          attack: dataValues.attack,
+          defense: dataValues.defense,
+          speed: dataValues.speed,
+          height: dataValues.height,
+          weight: dataValues.weight,
+          types: dataValues.types.map(t => t.name),
+          img: dataValues.img,
+        };
+        return poke;
+      }
+      return {};
     }
-    const {data} = await axios(`${url}/pokemon/${id}`);
+    const newId = parseInt(id);
+    if (!isNaN(newId)) {
+      const {data} = await axios(`${url}/pokemon/${newId}`);
+      if (data?.id) {
+        const poke = {
+          id: data.id,
+          name: data.name,
+          hp: data.stats[0].base_stat,
+          attack: data.stats[1].base_stat,
+          defense: data.stats[2].base_stat,
+          speed: data.stats[5].base_stat,
+          height: data.height,
+          weight: data.weight,
+          types: data.types.map(t => t.type.name),
+          img: data.sprites.other.dream_world.front_default,
+        };
+        return poke;
+      }
+      return {};
+    }
+    return null;
+  } catch (err) {
+    return err;
+  }
+};
+const getPokeByName = async name => {
+  const {data} = await axios(`${url}/pokemon/${name}`);
+  if (data?.id) {
     const poke = {
       id: data.id,
       name: data.name,
@@ -100,13 +129,11 @@ const getSinglePoke = async id => {
       height: data.height,
       weight: data.weight,
       types: data.types.map(t => t.type.name),
-      img: data.sprites.versions["generation-v"]["black-white"].animated
-        .front_default,
+      img: data.sprites.other.dream_world.front_default,
     };
     return poke;
-  } catch (err) {
-    return err;
   }
+  return {};
 };
 const postPoke = async ({
   name,
@@ -170,4 +197,5 @@ module.exports = {
   getSinglePoke,
   postPoke,
   getAllInfo,
+  getPokeByName,
 };

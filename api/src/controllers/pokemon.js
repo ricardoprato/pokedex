@@ -1,18 +1,24 @@
-const {getAllInfo, getSinglePoke, postPoke} = require("./utils");
+const {getAllInfo, getSinglePoke, postPoke, getPokeByName} = require("./utils");
 
 const getPokemons = async (req, res, next) => {
   try {
     const {name} = req.query;
     const response = await getAllInfo();
     if (name) {
-      const pokemon = response.find(p => p.name === name);
+      const pokemon = await getPokeByName(name);
       return pokemon
         ? res.send(pokemon)
         : res.status(404).send({msg: "poke not found"});
     }
     res.send(response);
   } catch (err) {
-    next(err);
+    if (err.response) {
+      res.status(err.response.status).send({msg: err.response.status});
+    } else if (err.request) {
+      next(err.request);
+    } else {
+      next(err);
+    }
   }
 };
 
@@ -22,7 +28,15 @@ const getPokemonId = async (req, res, next) => {
     const poke = await getSinglePoke(id);
     poke.id ? res.send(poke) : res.status(404).send({msg: "poke not found"});
   } catch (err) {
-    next(err);
+    if (err.response) {
+      res
+        .status(err.response.status)
+        .send({msg: err.response.statusText + " " + err.response.status});
+    } else if (err.request) {
+      next(err.request);
+    } else {
+      next(err);
+    }
   }
 };
 const postPokemon = async (req, res, next) => {
@@ -30,10 +44,16 @@ const postPokemon = async (req, res, next) => {
     const props = req.body;
     const poke = await postPoke(props);
     poke.dataValues
-      ? res.code(201).send({msg: "poke created successfully"})
+      ? res.status(201).send({msg: "poke created successfully"})
       : res.status(401).send({msg: "invalid data"});
   } catch (err) {
-    next(err);
+    if (err.response) {
+      res.status(err.response.status).send({msg: err.response.status});
+    } else if (err.request) {
+      next(err.request);
+    } else {
+      next(err);
+    }
   }
 };
 module.exports = {

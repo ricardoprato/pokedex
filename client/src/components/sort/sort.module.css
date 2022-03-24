@@ -1,0 +1,18 @@
+.option {
+  appearance: none;
+  padding: 0.5rem;
+  background-color: white;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  box-shadow: 0.6rem 0.6rem 4rem #e9e8e7;
+  color: #909497;
+  border-radius: 0.6rem;
+  background-image: url("../../img/arrow.svg");
+  background-repeat: no-repeat;
+  background-size: 1rem;
+  background-position: 85%;
+}
+.option::-ms-expand {
+  display: none;
+}
