@@ -43,6 +43,7 @@ const postPokemon = async (req, res, next) => {
   try {
     const props = req.body;
     const poke = await postPoke(props);
+    console.log(poke.dataValues);
     poke.dataValues
       ? res.status(201).send({msg: "poke created successfully"})
       : res.status(401).send({msg: "invalid data"});

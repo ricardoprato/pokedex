@@ -22,7 +22,7 @@ const getAllPoke = async url => {
           height: p.value.data.height,
           weight: p.value.data.weight,
           types: p.value.data.types.map(t => t.type.name),
-          img: p.value.data.sprites.other.dream_world.front_default,
+          img: p.value.data.sprites.other["official-artwork"].front_default,
         };
       });
     return pokemon;
@@ -105,7 +105,7 @@ const getSinglePoke = async id => {
           height: data.height,
           weight: data.weight,
           types: data.types.map(t => t.type.name),
-          img: data.sprites.other.dream_world.front_default,
+          img: data.sprites.other["official-artwork"].front_default,
         };
         return poke;
       }
