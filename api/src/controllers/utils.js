@@ -198,4 +198,5 @@ module.exports = {
   postPoke,
   getAllInfo,
   getPokeByName,
+  getPokeDb,
 };

@@ -1,4 +1,4 @@
-const validator = form => {
+const validator = (form, pokeDb) => {
   const errors = {};
   if (form.name) {
     if (form.name.trim() === "") {
@@ -10,9 +10,16 @@ const validator = form => {
     } else if (form.name.length > 30) {
       errors.name = "name must be less than 30 characters long";
     }
+    pokeDb.length &&
+      // eslint-disable-next-line array-callback-return
+      pokeDb.map(pokemon => {
+        if (pokemon.name === form.name) {
+          errors.name = "Name already exists";
+        }
+      });
   }
   if (form.hp) {
-    if (form.hp.trim() === "") {
+    if (form.hp === "") {
       errors.hp = "HP cannot be empty";
     } else if (/^\D/.test(form.hp)) {
       errors.hp = "HP must be numeric";
@@ -23,9 +30,9 @@ const validator = form => {
     }
   }
   if (form.attack) {
-    if (form.attack.trim() === "") {
+    if (form.attack === "") {
       errors.attack = "Attack cannot be empty";
-    } else if (form.attack.match(/[^0-9]/)) {
+    } else if (/^\D/.test(form.attack)) {
       errors.attack = "Attack must be numeric";
     } else if (form.attack < 5) {
       errors.attack = "Attack must be at least 5";
@@ -34,9 +41,9 @@ const validator = form => {
     }
   }
   if (form.defense) {
-    if (form.defense.trim() === "") {
+    if (form.defense === "") {
       errors.defense = "Defense cannot be empty";
-    } else if (form.defense.match(/[^0-9]/)) {
+    } else if (/^\D/.test(form.defense)) {
       errors.defense = "Defense must be numeric";
     } else if (form.defense < 5) {
       errors.defense = "Defense must be at least 5";
@@ -45,9 +52,9 @@ const validator = form => {
     }
   }
   if (form.speed) {
-    if (form.speed.trim() === "") {
+    if (form.speed === "") {
       errors.speed = "Speed cannot be empty";
-    } else if (form.speed.match(/[^0-9]/)) {
+    } else if (/^\D/.test(form.speed)) {
       errors.speed = "Speed must be numeric";
     } else if (form.speed < 5) {
       errors.speed = "Speed must be at least 5";
@@ -56,9 +63,9 @@ const validator = form => {
     }
   }
   if (form.height) {
-    if (form.height.trim() === "") {
+    if (form.height === "") {
       errors.height = "Height cannot be empty";
-    } else if (form.height.match(/[^0-9]/)) {
+    } else if (/^\D/.test(form.height)) {
       errors.height = "Height must be numeric";
     } else if (form.height < 1) {
       errors.height = "Height must be at least 1m";
@@ -67,9 +74,9 @@ const validator = form => {
     }
   }
   if (form.weight) {
-    if (form.weight.trim() === "") {
+    if (form.weight === "") {
       errors.weight = "Weight cannot be empty";
-    } else if (form.weight.match(/[^0-9]/)) {
+    } else if (/^\D/.test(form.weight)) {
       errors.weight = "Weight must be numeric";
     } else if (form.weight < 1) {
       errors.weight = "Weight must be at least 1kg";

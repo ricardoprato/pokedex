@@ -1,4 +1,10 @@
-const {getAllInfo, getSinglePoke, postPoke, getPokeByName} = require("./utils");
+const {
+  getAllInfo,
+  getPokeDb,
+  getSinglePoke,
+  postPoke,
+  getPokeByName,
+} = require("./utils");
 
 const getPokemons = async (req, res, next) => {
   try {
@@ -22,6 +28,20 @@ const getPokemons = async (req, res, next) => {
   }
 };
 
+const getPokemonsDB = async (req, res, next) => {
+  try {
+    const response = await getPokeDb();
+    res.send(response);
+  } catch (err) {
+    if (err.response) {
+      res.status(err.response.status).send({msg: err.response.status});
+    } else if (err.request) {
+      next(err.request);
+    } else {
+      next(err);
+    }
+  }
+};
 const getPokemonId = async (req, res, next) => {
   try {
     const {id} = req.params;
@@ -43,10 +63,9 @@ const postPokemon = async (req, res, next) => {
   try {
     const props = req.body;
     const poke = await postPoke(props);
-    console.log(poke.dataValues);
     poke.dataValues
-      ? res.status(201).send({msg: "poke created successfully"})
-      : res.status(401).send({msg: "invalid data"});
+      ? res.status(201).send({msg: "Pokemon added"})
+      : res.status(200).send({msg: "invalid data"});
   } catch (err) {
     if (err.response) {
       res.status(err.response.status).send({msg: err.response.status});
@@ -61,4 +80,5 @@ module.exports = {
   getPokemons,
   getPokemonId,
   postPokemon,
+  getPokemonsDB,
 };

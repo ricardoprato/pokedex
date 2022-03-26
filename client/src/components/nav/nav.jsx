@@ -1,7 +1,13 @@
-import {NavLink} from "react-router-dom";
+import {NavLink, Outlet} from "react-router-dom";
 
 const Nav = () => {
-  <NavLink></NavLink>;
+  return (
+    <nav>
+      <NavLink to="/">Home</NavLink>
+      <NavLink to="/pokemonCreate">Create a Poke</NavLink>
+      <Outlet />
+    </nav>
+  );
 };
 
 export default Nav;

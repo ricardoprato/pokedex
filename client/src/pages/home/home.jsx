@@ -10,10 +10,12 @@ const Home = () => {
     <div>
       <SearchBar />
       <Sort />
-      {pokemons ? (
-        <main className={styles.mainGrid}>
-          <ListOfPoke />
-        </main>
+      {pokemons.length ? (
+        <>
+          <main className={styles.mainGrid}>
+            <ListOfPoke />
+          </main>
+        </>
       ) : (
         <Loading />
       )}
