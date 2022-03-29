@@ -1,9 +1,10 @@
 .form {
+  margin-top: 2rem;
   display: flex;
   flex-wrap: wrap;
   width: 40%;
   border-radius: 2rem;
-  height: 100vh;
+  min-height: 100vh;
   padding: 5rem;
   margin-left: auto;
   margin-right: auto;
@@ -12,4 +13,55 @@
 }
 .label {
   width: 100%;
+}
+.select {
+  width: 100%;
+}
+.divTypes {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+}
+.input {
+  width: 100%;
+}
+.error {
+  width: 100%;
+  color: #fc4a5a;
+}
+.errorInput {
+  width: 100%;
+  animation: shake 300ms;
+}
+@keyframes shake {
+  25% {
+    transform: translateX(4px);
+  }
+  50% {
+    transform: translateX(-4px);
+  }
+  75% {
+    transform: translateX(4px);
+  }
+}
+.submit {
+  width: 100%;
+  margin-top: 2rem;
+  background-color: #fc4a5a;
+  border: 1px solid #fff;
+  border-radius: 0.5rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #fff;
+  cursor: pointer;
+}
+.submit:active {
+  background-color: #fff;
+  color: #fc4a5a;
+  border: 1px solid #fc4a5a;
+}
+.button {
+  width: 50%;
+  border: none;
+  appearance: none;
 }

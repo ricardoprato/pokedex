@@ -16,11 +16,6 @@ const rootReducer = (state = initialState, action) => {
         pokeCopy: [...action.payload],
         pokeDb: [...action.payload].filter(poke => typeof poke.id === "string"),
       };
-    case "GET_POKE_DB":
-      return {
-        ...state,
-        pokeDb: [...action.payload],
-      };
     case "GET_SINGLE_POKE":
       return {
         ...state,

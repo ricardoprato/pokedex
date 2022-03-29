@@ -19,24 +19,6 @@ export const getPokes = () => {
   };
 };
 
-export const getPokesDb = () => {
-  return async dispatch => {
-    try {
-      const response = await fetch(`${url}/pokemons/db`);
-      const pokemons = await response.json();
-      return dispatch({type: "GET_POKE_DB", payload: pokemons});
-    } catch (err) {
-      if (err.response) {
-        const {response} = err;
-        console.log(response.data);
-        console.log(response.status);
-        console.log(response.headers);
-      }
-      console.log(err);
-      return dispatch({type: "GET_POKE_DB", payload: []});
-    }
-  };
-};
 export const getSinglePokeById = id => {
   return async dispatch => {
     try {

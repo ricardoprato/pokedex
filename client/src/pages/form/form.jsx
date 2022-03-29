@@ -1,7 +1,7 @@
 import {useSelector, useDispatch} from "react-redux";
 import {useParams, useNavigate} from "react-router";
-import {useEffect, useState} from "react";
-import {getTypes, getPokes, getPokesDb} from "../../redux/actions";
+import {useState} from "react";
+import {getPokes} from "../../redux/actions";
 import validator from "./validators";
 import styles from "./form.module.css";
 import axios from "axios";
@@ -60,19 +60,17 @@ const Form = () => {
         ? axios.put(`http://localhost:3001/pokemons/${id}`, form)
         : (msg = await axios.post("http://localhost:3001/pokemons", form));
       msg && alert(msg.data.msg);
+
       if (msg.data.msg === "Pokemon added") {
         dispatch(getPokes());
-        navigate("/");
+        navigate("/", {replace: true});
       }
     }
   };
-  useEffect(() => {
-    !pokeDb.length && dispatch(getPokesDb());
-    !types.length && dispatch(getTypes());
-  }, [dispatch, pokeDb.length, types.length]);
+
   return (
     <>
-      {pokeDb.length ? (
+      {pokeDb ? (
         <form className={styles.form} onSubmit={handleSubmit}>
           <label className={styles.label} htmlFor="name">
             name
@@ -82,6 +80,7 @@ const Form = () => {
             name="name"
             id="name"
             placeholder="Pokémon name"
+            className={errors?.name ? styles.errorInput : styles.input}
             onChange={handleChange}
           />
           {errors?.name && <p className={styles.error}>{errors?.name}</p>}
@@ -93,7 +92,7 @@ const Form = () => {
             name="hp"
             id="hp"
             placeholder="Pokémon health"
-            className={styles.input}
+            className={errors?.hp ? styles.errorInput : styles.input}
             onChange={handleChange}
           />
           {errors?.hp && <p className={styles.error}>{errors?.hp}</p>}
@@ -105,6 +104,7 @@ const Form = () => {
             id="attack"
             name="attack"
             placeholder="Pokémon attack"
+            className={errors?.attack ? styles.errorInput : styles.input}
             onChange={handleChange}
           />
           {errors?.attack && <p className={styles.error}>{errors?.attack}</p>}
@@ -115,6 +115,7 @@ const Form = () => {
             type="text"
             name="defense"
             placeholder="Pokémon defense"
+            className={errors?.defense ? styles.errorInput : styles.input}
             onChange={handleChange}
           />
           {errors?.defense && <p className={styles.error}>{errors?.defense}</p>}
@@ -126,6 +127,7 @@ const Form = () => {
             name="speed"
             id="speed"
             placeholder="Pokémon speed"
+            className={errors?.speed ? styles.errorInput : styles.input}
             onChange={handleChange}
           />
           {errors?.speed && <p className={styles.error}>{errors?.speed}</p>}
@@ -137,6 +139,7 @@ const Form = () => {
             name="height"
             id="height"
             placeholder="Pokémon height"
+            className={errors?.height ? styles.errorInput : styles.input}
             onChange={handleChange}
           />
           {errors?.height && <p className={styles.error}>{errors?.height}</p>}
@@ -148,6 +151,7 @@ const Form = () => {
             name="weight"
             id="weight"
             placeholder="Pokémon weight"
+            className={errors?.weight ? styles.errorInput : styles.input}
             onChange={handleChange}
           />
           {errors?.weight && <p className={styles.error}>{errors?.weight}</p>}
@@ -159,20 +163,26 @@ const Form = () => {
             name="img"
             id="img"
             placeholder="Pokémon img"
+            className={errors?.img ? styles.errorInput : styles.input}
             onChange={handleChange}
           />
           {errors?.img && <p className={styles.error}>{errors?.img}</p>}
           <label htmlFor="types" className={styles.label}>
             types
           </label>
-          <div>
+          <div className={styles.divTypes}>
             {form.types.map(t => (
-              <button key={t} className={t} value={t} onClick={handleRemove}>
+              <button
+                key={t}
+                className={`${t} ${styles.button}`}
+                value={t}
+                onClick={handleRemove}
+              >
                 {t}
               </button>
             ))}
           </div>
-          <select id="types" onChange={handleType}>
+          <select id="types" onChange={handleType} className={styles.select}>
             {types &&
               types.map(type => (
                 <option key={type.id} value={type.name} className={type.name}>
@@ -181,10 +191,13 @@ const Form = () => {
               ))}
           </select>
           {errors?.types && <p className={styles.error}>{errors?.types}</p>}
-          <input
-            type="submit"
-            value={id ? "Update Pokémon" : "Create Pokémon"}
-          />
+          {!Object.keys(errors).length && (
+            <input
+              type="submit"
+              value={id ? "Update Pokémon" : "Create Pokémon"}
+              className={styles.submit}
+            />
+          )}
         </form>
       ) : (
         <Loading />

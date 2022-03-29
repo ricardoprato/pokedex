@@ -10,7 +10,7 @@ const validator = (form, pokeDb) => {
     } else if (form.name.length > 30) {
       errors.name = "name must be less than 30 characters long";
     }
-    pokeDb.length &&
+    pokeDb &&
       // eslint-disable-next-line array-callback-return
       pokeDb.map(pokemon => {
         if (pokemon.name === form.name) {
@@ -88,7 +88,7 @@ const validator = (form, pokeDb) => {
     if (form.img.trim() === "") {
       errors.img = "Image cannot be empty";
     } else if (
-      !/(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-])*((\.jpg)|(\.png)|(\.svg))\/?(\.webp)?/.test(
+      !/(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-])*((\.jpg)|(\.png)|(\.jpeg)|(\.svg))\/?(\.webp)?/.test(
         form.img
       )
     ) {

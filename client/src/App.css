@@ -26,16 +26,16 @@
   color: #60cbdd;
 }
 .electric {
-  color: #fbf773;
+  color: #ffd32d;
 }
 .fairy {
-  color: #e91469;
+  color: #ff1a64;
 }
 .fighting {
   color: #f05f3b;
 }
 .flying {
-  color: #94afc7;
+  color: #6f8293;
 }
 .ghost {
   color: #906791;
@@ -44,16 +44,16 @@
   color: #6f481e;
 }
 .ice {
-  color: #daf1f8;
+  color: #96a6ab;
 }
 .normal {
-  color: #c998a6;
+  color: #624a50;
 }
 .poison {
-  color: #9e69da;
+  color: #864879;
 }
 .psychic {
-  color: #f61c94;
+  color: #ce7bb0;
 }
 .rock {
   color: #8b3f23;
@@ -62,7 +62,7 @@
   color: #40be94;
 }
 .water {
-  color: #84a7fa;
+  color: #61a4bc;
 }
 .shadow {
   color: #040706;

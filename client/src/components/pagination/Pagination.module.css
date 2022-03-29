@@ -1,0 +1,28 @@
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+.page {
+  appearance: none;
+  border: 1px solid #fc4a5a;
+  outline: none;
+  box-shadow: 0.6rem 0.6rem 4rem #e9e8e7;
+  width: 2rem;
+  height: 2rem;
+  margin-right: 0.5rem;
+  background: #fff;
+  color: #fc4a5a;
+  cursor: pointer;
+}
+.active {
+  appearance: none;
+  border: 1px solid #fff;
+  outline: none;
+  box-shadow: 0.6rem 0.6rem 4rem #e9e8e7;
+  width: 2rem;
+  height: 2rem;
+  margin-right: 0.5rem;
+  background: #fc4a5a;
+  color: #fff;
+}

@@ -1,5 +1,5 @@
 import {useState} from "react";
-import {Routes, Route} from "react-router";
+import {Routes, Route, Navigate} from "react-router-dom";
 import Home from "./pages/home/home";
 import LandingPage from "./pages/landingpage/Landingpage";
 import Detail from "./pages/detail/detail";
@@ -14,11 +14,7 @@ function App() {
         <>
           <Routes>
             <Route path="/" element={<LandingPage setState={setActive} />} />
-            <Route element={<Nav />}>
-              <Route path="/detail/:id" element={<Detail />} />
-              <Route path="/pokemonUpdate/:id" element={<Form />} />
-              <Route path="/pokemonCreate/" element={<Form />} />
-            </Route>
+            <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </>
       ) : (

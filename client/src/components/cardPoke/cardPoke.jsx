@@ -16,7 +16,9 @@ const CardPoke = ({
   return (
     <>
       <div
-        className={`${styles.container} ${boolean && styles.containerWidth}`}
+        className={`${styles.container} ${styles[types[0]]} ${
+          boolean && styles.containerWidth
+        }`}
         data-id={id}
       >
         {boolean && (

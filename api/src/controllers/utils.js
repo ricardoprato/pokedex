@@ -6,8 +6,8 @@ const poke = "/pokemon";
 
 const getAllPoke = async url => {
   try {
-    const {data} = await axios(url);
-    const promises = data.results.map(p => axios(p.url));
+    const {data} = await axios.get(url);
+    const promises = data.results.map(p => axios.get(p.url));
     const response = await Promise.allSettled(promises);
     const pokemon = response
       .filter(p => p.status === "fulfilled")
@@ -60,7 +60,7 @@ const getPokeDb = async () => {
 
 const getAllInfo = async () => {
   try {
-    const pokeApi = await getAllPoke(`${url}${poke}`);
+    const pokeApi = (await getAllPoke(`${url}${poke}?limit=40&offset=0`)) || [];
     const pokeDb = await getPokeDb();
     return [...pokeApi, ...pokeDb];
   } catch (err) {
@@ -93,7 +93,7 @@ const getSinglePoke = async id => {
     }
     const newId = parseInt(id);
     if (!isNaN(newId)) {
-      const {data} = await axios(`${url}/pokemon/${newId}`);
+      const {data} = await axios.get(`${url}/pokemon/${newId}`);
       if (data?.id) {
         const poke = {
           id: data.id,
@@ -117,7 +117,7 @@ const getSinglePoke = async id => {
   }
 };
 const getPokeByName = async name => {
-  const {data} = await axios(`${url}/pokemon/${name}`);
+  const {data} = await axios.get(`${url}/pokemon/${name}`);
   if (data?.id) {
     const poke = {
       id: data.id,
@@ -129,7 +129,7 @@ const getPokeByName = async name => {
       height: data.height,
       weight: data.weight,
       types: data.types.map(t => t.type.name),
-      img: data.sprites.other.dream_world.front_default,
+      img: data.sprites.other["official-artwork"].front_default,
     };
     return poke;
   }
