@@ -2,7 +2,7 @@ import {useSelector, useDispatch} from "react-redux";
 import styles from "./sort.module.css";
 import {useState, useEffect} from "react";
 import {sortAndFilter} from "../../redux/actions/index";
-const Sort = ({setPokePerPage, setCurrentPage}) => {
+const Sort = ({setPokePerPage, setCurrentPage, gen}) => {
   const types = useSelector(state => state.types);
   const [sort, setSort] = useState({
     order: "ascending",
@@ -20,7 +20,7 @@ const Sort = ({setPokePerPage, setCurrentPage}) => {
     setCurrentPage(1);
   };
   useEffect(() => {
-    dispatch(sortAndFilter(sort));
+    dispatch(sortAndFilter(sort, gen));
   }, [dispatch, sort]);
   return (
     <>
@@ -58,7 +58,11 @@ const Sort = ({setPokePerPage, setCurrentPage}) => {
               {types &&
                 types.map(t => {
                   return (
-                    <option key={t.id} value={t.name} className={`${t.name}`}>
+                    <option
+                      key={t.id}
+                      value={t.name}
+                      className={`${styles[t.name]}`}
+                    >
                       {t.name}
                     </option>
                   );
@@ -89,7 +93,6 @@ const Sort = ({setPokePerPage, setCurrentPage}) => {
             <option value="12">12</option>
             <option value="24">24</option>
             <option value="36">36</option>
-            <option value="151">151</option>
           </select>
         </div>
       </form>

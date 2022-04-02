@@ -1,10 +1,9 @@
 import {useSelector, useDispatch} from "react-redux";
 import {useParams, useNavigate} from "react-router";
 import {useState} from "react";
-import {getPokes} from "../../redux/actions";
+import {addPokeDb, getPokesApi} from "../../redux/actions";
 import validator from "./validators";
 import styles from "./form.module.css";
-import axios from "axios";
 import Loading from "../../components/loading/loading";
 const Form = () => {
   const pokeDb = useSelector(state => state.pokeDb);
@@ -57,12 +56,26 @@ const Form = () => {
     ) {
       let msg = null;
       id
-        ? axios.put(`http://localhost:3001/pokemons/${id}`, form)
-        : (msg = await axios.post("http://localhost:3001/pokemons", form));
-      msg && alert(msg.data.msg);
+        ? (msg = await fetch(`http://localhost:3001/pokemons/${id}`, {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(poke),
+          }))
+        : (msg = await fetch("http://localhost:3001/pokemons", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(form),
+          }));
+      const res = await msg.json();
+      console.log(res);
+      msg && alert(msg.status + " " + res.msg);
 
-      if (msg.data.msg === "Pokemon added") {
-        dispatch(getPokes());
+      if (res.msg === "Pokemon added") {
+        dispatch(addPokeDb(res.id));
         navigate("/", {replace: true});
       }
     }
@@ -185,7 +198,11 @@ const Form = () => {
           <select id="types" onChange={handleType} className={styles.select}>
             {types &&
               types.map(type => (
-                <option key={type.id} value={type.name} className={type.name}>
+                <option
+                  key={type.id}
+                  value={type.name}
+                  className={styles[type.name]}
+                >
                   {type.name}
                 </option>
               ))}

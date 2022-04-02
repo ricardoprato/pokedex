@@ -9,6 +9,7 @@
   grid-template-areas:
     ". img ."
     ". name ."
+    ". id ."
     ". type .";
   height: 12rem;
 }
@@ -97,6 +98,11 @@
   margin-top: -1rem;
   line-height: 1.2;
 }
+.id {
+  grid-area: id;
+  font-size: 1rem;
+  color: #66625c;
+}
 .types {
   text-transform: uppercase;
   grid-area: type;
@@ -113,6 +119,7 @@
   margin-left: auto;
   margin-right: auto;
   max-height: 5rem;
+  margin-bottom: 5%;
 }
 .circle {
   border-radius: 50%;

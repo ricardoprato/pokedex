@@ -9,7 +9,7 @@
 }
 .option {
   appearance: none;
-  padding: 0.5rem;
+  padding: 0.5rem 0.8rem 0.5rem 0.5rem;
   background-color: white;
   border: none;
   outline: none;
@@ -20,7 +20,7 @@
   background-image: url("../../img/arrow.svg");
   background-repeat: no-repeat;
   background-size: 1rem;
-  background-position: 85%;
+  background-position: 90%;
   margin-right: 0.5rem;
 }
 .option::-ms-expand {
@@ -31,14 +31,76 @@
   appearance: none;
   outline: none;
   border: none;
-  padding: 0.5rem;
   background-color: transparent;
   font-weight: bold;
-  background-image: url("../../img/arrow.svg");
+  background-image: url("../../img/black_arrow.svg");
   background-repeat: no-repeat;
   background-size: 1rem;
-  background-position: 85%;
+  background-position: 100%;
+  margin: 0.5rem;
+  cursor: pointer;
 }
+
 .mainOption::-ms-expand {
   display: none;
+}
+.fire {
+  color: #fc4a5a;
+}
+.grass {
+  color: #24cb51;
+}
+.bug {
+  color: #418651;
+}
+.dark {
+  color: #5a5b79;
+}
+.dragon {
+  color: #60cbdd;
+}
+.electric {
+  color: #ffd32d;
+}
+.fairy {
+  color: #ff1a64;
+}
+.fighting {
+  color: #f05f3b;
+}
+.flying {
+  color: #6f8293;
+}
+.ghost {
+  color: #906791;
+}
+.ground {
+  color: #6f481e;
+}
+.ice {
+  color: #96a6ab;
+}
+.normal {
+  color: #624a50;
+}
+.poison {
+  color: #864879;
+}
+.psychic {
+  color: #ce7bb0;
+}
+.rock {
+  color: #8b3f23;
+}
+.steel {
+  color: #40be94;
+}
+.water {
+  color: #61a4bc;
+}
+.shadow {
+  color: #040706;
+}
+.unknown {
+  color: #5e746d;
 }

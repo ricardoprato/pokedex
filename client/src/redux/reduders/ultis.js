@@ -33,7 +33,7 @@ const sortAndFilter = ({order, allPokes, allTypes, stats}, array) => {
           }
         case "created":
           if (allTypes === "all") {
-            if (stats === "name") {
+            if (stats === "name" || stats === "id") {
               return array
                 .filter(a => typeof a.id === "string")
                 .sort((a, b) => a[stats].localeCompare(b[stats]));
@@ -43,7 +43,7 @@ const sortAndFilter = ({order, allPokes, allTypes, stats}, array) => {
                 .sort((a, b) => a[stats] - b[stats]);
             }
           } else {
-            if (stats === "name") {
+            if (stats === "name" || stats === "id") {
               return array
                 .filter(a => typeof a.id === "string")
                 .filter(a => a.types.includes(allTypes))

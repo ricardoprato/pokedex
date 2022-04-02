@@ -1,28 +1,35 @@
-const axios = require("axios");
+const fetch = require("node-fetch");
 const {Pokemon, Type} = require("../db");
 const {Op} = require("sequelize");
 const url = "https://pokeapi.co/api/v2";
 const poke = "/pokemon";
 
-const getAllPoke = async url => {
+const getPokeApi = async (limit, offset) => {
   try {
-    const {data} = await axios.get(url);
-    const promises = data.results.map(p => axios.get(p.url));
-    const response = await Promise.allSettled(promises);
-    const pokemon = response
+    const response = await fetch(
+      `${url}${poke}?offset=${offset}&limit=${limit}`
+    );
+    const data = await response.json();
+    const promises = data?.results.map(async p => {
+      const response = await fetch(p?.url);
+      const data = await response.json();
+      return data;
+    });
+    const responses = await Promise.allSettled(promises);
+    const pokemon = responses
       .filter(p => p.status === "fulfilled")
-      .map(p => {
+      .map(({value}) => {
         return {
-          id: p.value.data.id,
-          name: p.value.data.name,
-          hp: p.value.data.stats[0].base_stat,
-          attack: p.value.data.stats[1].base_stat,
-          defense: p.value.data.stats[2].base_stat,
-          speed: p.value.data.stats[5].base_stat,
-          height: p.value.data.height,
-          weight: p.value.data.weight,
-          types: p.value.data.types.map(t => t.type.name),
-          img: p.value.data.sprites.other["official-artwork"].front_default,
+          id: value.id,
+          name: value.name,
+          hp: value.stats[0].base_stat,
+          attack: value.stats[1].base_stat,
+          defense: value.stats[2].base_stat,
+          speed: value.stats[5].base_stat,
+          height: value.height,
+          weight: value.weight,
+          types: value.types.map(t => t.type.name),
+          img: value.sprites.other["official-artwork"].front_default,
         };
       });
     return pokemon;
@@ -30,7 +37,7 @@ const getAllPoke = async url => {
     return err;
   }
 };
-const getPokeDb = async () => {
+const getPokesDb = async () => {
   try {
     let poke = await Pokemon.findAll({
       include: {
@@ -58,15 +65,16 @@ const getPokeDb = async () => {
   }
 };
 
-const getAllInfo = async () => {
+/* const getAllInfo = async () => {
   try {
-    const pokeApi = (await getAllPoke(`${url}${poke}?limit=40&offset=0`)) || [];
-    const pokeDb = await getPokeDb();
+    const pokeApi = (await getPokeApi(`${url}${poke}?limit=40&offset=0`)) || [];
+    const pokeDb = await getPokesDb();
     return [...pokeApi, ...pokeDb];
   } catch (err) {
     return err;
   }
-};
+}; */
+
 const getSinglePoke = async id => {
   try {
     if (id.slice(-2).toUpperCase() === "DB") {
@@ -93,7 +101,8 @@ const getSinglePoke = async id => {
     }
     const newId = parseInt(id);
     if (!isNaN(newId)) {
-      const {data} = await axios.get(`${url}/pokemon/${newId}`);
+      const response = await fetch(`${url}${poke}/${newId}`);
+      const data = await response.json();
       if (data?.id) {
         const poke = {
           id: data.id,
@@ -117,7 +126,8 @@ const getSinglePoke = async id => {
   }
 };
 const getPokeByName = async name => {
-  const {data} = await axios.get(`${url}/pokemon/${name}`);
+  const response = await fetch(`${url}${poke}/${name}`);
+  const data = await response.json();
   if (data?.id) {
     const poke = {
       id: data.id,
@@ -172,7 +182,8 @@ const postPoke = async ({
 };
 const saveType = async () => {
   try {
-    const {data} = await axios(`${url}/type`);
+    const response = await fetch(`${url}/type`);
+    const data = await response.json();
     const types = data.results.map(t => {
       return {name: t.name};
     });
@@ -196,7 +207,7 @@ module.exports = {
   getTypes,
   getSinglePoke,
   postPoke,
-  getAllInfo,
+  getPokeApi,
   getPokeByName,
-  getPokeDb,
+  getPokesDb,
 };

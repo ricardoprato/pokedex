@@ -16,9 +16,9 @@ const CardPoke = ({
   return (
     <>
       <div
-        className={`${styles.container} ${styles[types[0]]} ${
-          boolean && styles.containerWidth
-        }`}
+        className={`${styles.container} ${
+          styles[types[Math.floor(Math.random() * types.length)]]
+        } ${boolean && styles.containerWidth}`}
         data-id={id}
       >
         {boolean && (
@@ -33,6 +33,7 @@ const CardPoke = ({
         )}
 
         <h2 className={styles.mainText}>{name}</h2>
+        {boolean && <p className={styles.id}>ID: {id}</p>}
         <div className={styles.types}>
           {types.map((t, i) => {
             return (

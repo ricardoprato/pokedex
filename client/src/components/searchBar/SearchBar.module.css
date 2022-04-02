@@ -34,6 +34,39 @@
   appearance: none;
   position: relative;
 }
+.errors {
+  box-shadow: 0.6rem 0.6rem 4rem #e9e8e7;
+  width: 100%;
+  border: 1px solid #fc4a5a;
+  border-radius: 0.6rem;
+  padding: 0.5em;
+  font-size: 1rem;
+  line-height: 1;
+  outline: none;
+  background-image: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  position: relative;
+  animation: shake 300ms;
+}
+@keyframes shake {
+  25% {
+    transform: translateX(4px);
+  }
+  50% {
+    transform: translateX(-4px);
+  }
+  75% {
+    transform: translateX(4px);
+  }
+}
+.error {
+  color: #fc4a5a;
+  margin-top: 0.5rem;
+  margin-left: 0.5rem;
+  font-size: 0.8rem;
+}
 .button {
   width: 2rem;
   height: 2rem;
@@ -51,8 +84,8 @@
   margin-left: -2.5rem;
   top: 0.3rem;
 }
-.button:hover {
-  background-color: #fff;
+.button:active {
+  box-shadow: 0 0 0.5rem #fc4a5a;
 }
 .button::before {
   content: "";
@@ -76,17 +109,13 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
-.button::before:hover,
-.button::after:hover {
-  background-color: #fc4a5a;
-}
+
 .buttonDetail {
   width: 1.5rem;
   height: 0.2rem;
   border: none;
   outline: none;
   background-color: #fc4a5a;
-  padding: 0.5m;
   outline: none;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -107,8 +136,4 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-}
-.buttonDetail::before:hover,
-.buttonDetail:hover {
-  background-color: #fff;
 }

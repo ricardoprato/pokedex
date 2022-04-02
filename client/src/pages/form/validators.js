@@ -23,6 +23,8 @@ const validator = (form, pokeDb) => {
       errors.hp = "HP cannot be empty";
     } else if (/^\D/.test(form.hp)) {
       errors.hp = "HP must be numeric";
+    } else if (/(\.|\,)/g.test(form.hp)) {
+      errors.hp = "HP must be whole number";
     } else if (form.hp < 1) {
       errors.hp = "HP must be at least 1";
     } else if (form.hp > 255) {
@@ -34,6 +36,8 @@ const validator = (form, pokeDb) => {
       errors.attack = "Attack cannot be empty";
     } else if (/^\D/.test(form.attack)) {
       errors.attack = "Attack must be numeric";
+    } else if (/(\.|\,)/g.test(form.attack)) {
+      errors.attack = "Attack must be whole number";
     } else if (form.attack < 5) {
       errors.attack = "Attack must be at least 5";
     } else if (form.attack > 255) {
@@ -45,6 +49,8 @@ const validator = (form, pokeDb) => {
       errors.defense = "Defense cannot be empty";
     } else if (/^\D/.test(form.defense)) {
       errors.defense = "Defense must be numeric";
+    } else if (/(\.|\,)/g.test(form.defense)) {
+      errors.defense = "Defense must be whole number";
     } else if (form.defense < 5) {
       errors.defense = "Defense must be at least 5";
     } else if (form.defense > 255) {
@@ -56,6 +62,8 @@ const validator = (form, pokeDb) => {
       errors.speed = "Speed cannot be empty";
     } else if (/^\D/.test(form.speed)) {
       errors.speed = "Speed must be numeric";
+    } else if (/(\.|\,)/g.test(form.speed)) {
+      errors.speed = "Speed must be whole number";
     } else if (form.speed < 5) {
       errors.speed = "Speed must be at least 5";
     } else if (form.speed > 255) {
@@ -67,10 +75,12 @@ const validator = (form, pokeDb) => {
       errors.height = "Height cannot be empty";
     } else if (/^\D/.test(form.height)) {
       errors.height = "Height must be numeric";
+    } else if (/(\.|\,)/g.test(form.height)) {
+      errors.height = "Height must be whole number";
     } else if (form.height < 1) {
-      errors.height = "Height must be at least 1m";
-    } else if (form.height > 25) {
-      errors.height = "Height must be less than 25m";
+      errors.height = "Height must be at least 1cm";
+    } else if (form.height > 2500) {
+      errors.height = "Height must be less than 2500cm";
     }
   }
   if (form.weight) {
@@ -78,10 +88,12 @@ const validator = (form, pokeDb) => {
       errors.weight = "Weight cannot be empty";
     } else if (/^\D/.test(form.weight)) {
       errors.weight = "Weight must be numeric";
+    } else if (/(\.|\,)/g.test(form.weight)) {
+      errors.weight = "Weight must be whole number";
     } else if (form.weight < 1) {
-      errors.weight = "Weight must be at least 1kg";
-    } else if (form.weight > 25) {
-      errors.weight = "Weight must be less than 1000kg";
+      errors.weight = "Weight must be at least 1g";
+    } else if (form.weight > 1000000) {
+      errors.weight = "Weight must be less than 1.000.000g";
     }
   }
   if (form.img) {

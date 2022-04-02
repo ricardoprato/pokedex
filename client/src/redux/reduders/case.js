@@ -1,0 +1,14 @@
+export const GET_POKE = "GET_POKE";
+export const GET_SINGLE_POKE = "GET_SINGLE_POKE";
+export const GET_TYPES = "GET_TYPES";
+export const ADD_POKE_DB = "ADD_POKE_DB";
+export const SORT_AND_FILTER = "SORT_AND_FILTER";
+export const GET_POKE_DB = "GET_POKE_DB";
+export const GEN1 = "GEN1";
+export const GEN2 = "GEN2";
+export const GEN3 = "GEN3";
+export const GEN4 = "GEN4";
+export const GEN5 = "GEN5";
+export const GEN6 = "GEN6";
+export const GEN7 = "GEN7";
+export const GEN8 = "GEN8";
