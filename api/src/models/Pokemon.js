@@ -36,6 +36,14 @@ module.exports = sequelize => {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
+      specialAttack: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      specialDefense: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
       height: {
         type: DataTypes.INTEGER,
         allowNull: false,

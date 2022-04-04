@@ -4,6 +4,8 @@ const {
   getPokemonId,
   postPokemon,
   getPokemonsDB,
+  deletePoke,
+  updatePoke,
 } = require("../controllers/pokemon");
 const pokemonRoute = Router();
 
@@ -12,5 +14,7 @@ const pokemonRoute = Router();
 pokemonRoute.get("/", getPokemons);
 pokemonRoute.get("/dataBase", getPokemonsDB);
 pokemonRoute.get("/:id", getPokemonId);
+pokemonRoute.delete("/:id", deletePoke);
+pokemonRoute.put("/:id", updatePoke);
 pokemonRoute.post("/", postPokemon);
 module.exports = pokemonRoute;

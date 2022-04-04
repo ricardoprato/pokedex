@@ -12,7 +12,6 @@
   font-size: 75%;
   font-weight: bold;
   line-height: 1;
-  white-space: nowrap;
 }
 .div {
   width: 100%;
@@ -136,4 +135,10 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+@media (max-width: 440px) {
+  .container {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
 }

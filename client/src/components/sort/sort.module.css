@@ -8,8 +8,7 @@
   justify-content: space-between;
 }
 .option {
-  appearance: none;
-  padding: 0.5rem 0.8rem 0.5rem 0.5rem;
+  padding: 0.5rem;
   background-color: white;
   border: none;
   outline: none;
@@ -20,7 +19,7 @@
   background-image: url("../../img/arrow.svg");
   background-repeat: no-repeat;
   background-size: 1rem;
-  background-position: 90%;
+  background-position: 98%;
   margin-right: 0.5rem;
 }
 .option::-ms-expand {
@@ -28,7 +27,6 @@
 }
 
 .mainOption {
-  appearance: none;
   outline: none;
   border: none;
   background-color: transparent;
@@ -36,8 +34,8 @@
   background-image: url("../../img/black_arrow.svg");
   background-repeat: no-repeat;
   background-size: 1rem;
-  background-position: 100%;
-  margin: 0.5rem;
+  background-position: 98%;
+  margin-bottom: 0.5rem;
   cursor: pointer;
 }
 
@@ -103,4 +101,15 @@
 }
 .unknown {
   color: #5e746d;
+}
+@media (max-width: 480px) {
+  .option {
+    margin: 0;
+  }
+}
+@media (max-width: 440px) {
+  .container {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
 }

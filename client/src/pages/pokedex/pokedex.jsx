@@ -19,6 +19,7 @@ import {
   GEN7,
   GEN8,
 } from "../../redux/reduders/case";
+import NotFound from "../../components/notfound/notfound";
 const Pokedex = () => {
   const {gen} = useParams();
   const dispatch = useDispatch();
@@ -70,7 +71,9 @@ const Pokedex = () => {
           <main className={styles.mainGrid}>
             {currentPokemons.length ? (
               <ListOfPoke currentPoke={currentPokemons} />
-            ) : null}
+            ) : (
+              <NotFound msg="No matches found" />
+            )}
           </main>
           {pokeCopy.length ? (
             <div className={styles.pagination}>

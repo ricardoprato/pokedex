@@ -6,6 +6,8 @@ import {
   SORT_AND_FILTER,
   ADD_POKE_DB,
   GET_POKE_DB,
+  DELETE_POKE,
+  UPDATE_POKE,
   GEN1,
   GEN2,
   GEN3,
@@ -27,6 +29,7 @@ const initialState = {
   pokemonsGEN8: [],
   pokeCopy: [],
   pokeDetail: null,
+  pokemonUpdate: null,
   pokeDb: [],
   types: [],
 };
@@ -157,6 +160,17 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         pokeDb: [...state.pokeDb, action.payload],
       };
+    case DELETE_POKE:
+      return {
+        ...state,
+        pokeDb: state.pokeDb.filter(pokemon => pokemon.id !== action.payload),
+      };
+    case UPDATE_POKE:
+      return {
+        ...state,
+        pokemonUpdate: action.payload,
+      };
+
     case GET_TYPES:
       return {
         ...state,

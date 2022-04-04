@@ -76,10 +76,6 @@ const Sort = ({setPokePerPage, setCurrentPage, gen}) => {
             >
               <option value="id">id</option>
               <option value="name">name</option>
-              <option value="hp">hp</option>
-              <option value="attack">attack</option>
-              <option value="defense">defense</option>
-              <option value="speed">speed</option>
               <option value="height">height</option>
               <option value="weight">weight</option>
             </select>

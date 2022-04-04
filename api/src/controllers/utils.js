@@ -22,10 +22,6 @@ const getPokeApi = async (limit, offset) => {
         return {
           id: value.id,
           name: value.name,
-          hp: value.stats[0].base_stat,
-          attack: value.stats[1].base_stat,
-          defense: value.stats[2].base_stat,
-          speed: value.stats[5].base_stat,
           height: value.height,
           weight: value.weight,
           types: value.types.map(t => t.type.name),
@@ -49,10 +45,6 @@ const getPokesDb = async () => {
       return {
         id: `${dataValues.id}DB`,
         name: dataValues.name,
-        hp: dataValues.hp,
-        attack: dataValues.attack,
-        defense: dataValues.defense,
-        speed: dataValues.speed,
         height: dataValues.height,
         weight: dataValues.weight,
         types: dataValues.types.map(t => t.name),
@@ -89,6 +81,8 @@ const getSinglePoke = async id => {
           hp: dataValues.hp,
           attack: dataValues.attack,
           defense: dataValues.defense,
+          specialAttack: dataValues.specialAttack,
+          specialDefense: dataValues.specialDefense,
           speed: dataValues.speed,
           height: dataValues.height,
           weight: dataValues.weight,
@@ -110,6 +104,8 @@ const getSinglePoke = async id => {
           hp: data.stats[0].base_stat,
           attack: data.stats[1].base_stat,
           defense: data.stats[2].base_stat,
+          specialAttack: data.stats[3].base_stat,
+          specialDefense: data.stats[4].base_stat,
           speed: data.stats[5].base_stat,
           height: data.height,
           weight: data.weight,
@@ -150,6 +146,8 @@ const postPoke = async ({
   hp,
   attack,
   defense,
+  specialDefense,
+  specialAttack,
   speed,
   height,
   weight,
@@ -162,6 +160,8 @@ const postPoke = async ({
       hp,
       attack,
       defense,
+      specialDefense,
+      specialAttack,
       speed,
       height,
       weight,
@@ -174,7 +174,7 @@ const postPoke = async ({
         },
       },
     });
-    newPoke.addTypes(typesDb);
+    await newPoke.addTypes(typesDb);
     return newPoke;
   } catch (err) {
     return err;

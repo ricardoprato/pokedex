@@ -1,0 +1,58 @@
+.divFlex {
+  display: flex;
+  min-height: 100vh;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0.6rem 0.6rem 4rem #e9e8e7;
+  margin: 2rem;
+}
+.flex {
+  display: flex;
+  min-height: auto-fit;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+.text {
+  color: #fc4a5a;
+  font-size: 4rem;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 1rem;
+  width: 100%;
+}
+.status {
+  display: flex;
+  justify-content: center;
+  width: auto;
+  height: fit-content;
+  position: relative;
+}
+.status::after {
+  content: "";
+  height: 1rem;
+  position: absolute;
+  width: 100%;
+  bottom: 10%;
+  background-color: #00000099;
+  border-radius: 50%;
+}
+.code {
+  color: #66625c;
+  font-size: 20rem;
+  font-weight: bold;
+  letter-spacing: 0.5rem;
+}
+.msg {
+  color: #66625c;
+  font-size: 2rem;
+  letter-spacing: 0.2rem;
+  text-align: center;
+  width: 100%;
+}
+@media (max-width: 760px) {
+  .code {
+    font-size: 10rem;
+  }
+}

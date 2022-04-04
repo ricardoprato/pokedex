@@ -1,7 +1,7 @@
 .grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-gap: 1rem;
+  grid-column-gap: 2rem;
   padding: 2rem;
   align-items: baseline;
 }
@@ -13,4 +13,15 @@
   width: 60%;
   height: auto;
   position: absolute;
+}
+@media (max-width: 720px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 440px) {
+  .grid {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
 }

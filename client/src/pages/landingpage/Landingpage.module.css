@@ -15,3 +15,8 @@
   display: grid;
   place-content: center;
 }
+@media (max-width: 720px) {
+  .landing-page {
+    width: 100%;
+  }
+}

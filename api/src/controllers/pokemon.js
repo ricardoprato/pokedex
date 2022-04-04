@@ -1,3 +1,6 @@
+const {Pokemon, Type} = require("../db");
+const {Op} = require("sequelize");
+
 const {
   getPokeApi,
   getSinglePoke,
@@ -77,9 +80,81 @@ const postPokemon = async (req, res, next) => {
     }
   }
 };
+const deletePoke = async (req, res, next) => {
+  try {
+    const {id} = req.params;
+    const newId = Number(id.split(/\D/g)[0]);
+    const poke = await Pokemon.findByPk(newId);
+    if (poke) {
+      await poke.destroy();
+      res.send({msg: "Pokemon deleted"});
+    } else {
+      res.status(404).send({msg: "Pokemon not found"});
+    }
+  } catch (err) {
+    if (err.response) {
+      res.status(err.response.status).send({msg: err.response.status});
+    } else if (err.request) {
+      next(err.request);
+    } else {
+      next(err);
+    }
+  }
+};
+const updatePoke = async (req, res, next) => {
+  try {
+    const {id} = req.params;
+    const newId = Number(id.split(/\D/g)[0]);
+    const poke = await Pokemon.findByPk(newId);
+    if (poke) {
+      const {
+        name,
+        hp,
+        attack,
+        defense,
+        specialAttack,
+        specialDefense,
+        speed,
+        img,
+        types,
+      } = req.body;
+      await poke.update({
+        name,
+        hp,
+        attack,
+        defense,
+        specialAttack,
+        specialDefense,
+        speed,
+        img,
+      });
+      let type = await Type.findAll({
+        where: {
+          name: {
+            [Op.or]: types,
+          },
+        },
+      });
+      await poke.setTypes(type);
+      res.send({msg: "Pokemon updated"});
+    } else {
+      res.status(404).send({msg: "Pokemon not found"});
+    }
+  } catch (err) {
+    if (err.response) {
+      res.status(err.response.status).send({msg: err.response.status});
+    } else if (err.request) {
+      next(err.request);
+    } else {
+      next(err);
+    }
+  }
+};
 module.exports = {
   getPokemons,
   getPokemonId,
   postPokemon,
   getPokemonsDB,
+  deletePoke,
+  updatePoke,
 };

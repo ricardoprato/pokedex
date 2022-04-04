@@ -1,20 +1,27 @@
 .form {
   margin: 2rem;
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 1rem;
   border-radius: 2rem;
-  width: 50%;
-  min-width: 400px;
   min-height: 100vh;
   padding: 5rem;
-  margin-left: auto;
-  margin-right: auto;
   box-shadow: 0.6rem 0.6rem 4rem #e9e8e7;
   color: #66625c;
 }
 .label {
   width: 100%;
   margin-top: 0.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
+}
+.types {
+  justify-self: center;
+  grid-column: 1/3;
+}
+.input {
+  height: 3rem;
 }
 .select {
   width: 100%;
@@ -26,10 +33,6 @@
   outline: none;
   cursor: pointer;
   color: #909497;
-  background-image: url("../../img/arrow.svg");
-  background-repeat: no-repeat;
-  background-size: 1rem;
-  background-position: 95%;
 }
 .select::-ms-expand {
   display: none;
@@ -48,10 +51,13 @@
 .error {
   width: 100%;
   color: #fc4a5a;
+  position: absolute;
+  bottom: -1.5rem;
 }
 .errorInput {
   width: 100%;
   animation: shake 300ms;
+  height: 3rem;
 }
 @keyframes shake {
   25% {
@@ -74,6 +80,7 @@
   font-weight: bold;
   color: #fff;
   cursor: pointer;
+  grid-column: 1/3;
 }
 .submit:active {
   background-color: #fff;
@@ -85,6 +92,7 @@
   border: none;
   appearance: none;
   cursor: pointer;
+  height: 2rem;
 }
 .fire {
   color: #fc4a5a;
@@ -145,4 +153,42 @@
 }
 .unknown {
   color: #5e746d;
+}
+.update {
+  width: 50%;
+  font-size: 1rem;
+  border: none;
+  border-radius: 1rem;
+  color: white;
+  font-weight: bold;
+  padding: 0.5rem;
+  cursor: pointer;
+  background-color: #fc4a5a;
+}
+
+.update:active {
+  color: #fc4a5a;
+  background-color: #fff;
+  border: 1px solid #fc4a5a;
+}
+
+@media (max-width: 650px) {
+  .form {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .input {
+    width: 100%;
+    height: 2rem;
+  }
+  .errorInput {
+    height: 2rem;
+  }
+}
+@media (max-width: 440px) {
+  .form {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    padding: 2rem;
+  }
 }

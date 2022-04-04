@@ -2,12 +2,13 @@ import {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {useParams} from "react-router-dom";
 import {
+  clearData,
   getSinglePokeById,
   getSinglePokeByName,
 } from "../../redux/actions/index";
 import Loading from "../../components/loading/loading";
 import CardPoke from "../../components/cardPoke/cardPoke";
-import styles from "./detail.module.css";
+import NotFound from "../../components/notfound/notfound";
 const Detail = () => {
   const dispatch = useDispatch();
   const pokemon = useSelector(state => state.pokeDetail);
@@ -24,19 +25,20 @@ const Detail = () => {
     } else {
       dispatch(getSinglePokeById(id));
     }
+    return () => dispatch(clearData(null));
   }, [dispatch, id]);
   return (
-    <div className={styles.container}>
+    <>
       {pokemon ? (
         pokemon?.id ? (
           <CardPoke {...pokemon} boolean={true} />
         ) : (
-          <div>hola</div>
+          <NotFound msg="Pokemon not found" />
         )
       ) : (
         <Loading />
       )}
-    </div>
+    </>
   );
 };
 
