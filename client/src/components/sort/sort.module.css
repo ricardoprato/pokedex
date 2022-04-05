@@ -113,3 +113,8 @@
     padding-right: 0.5rem;
   }
 }
+@media (max-width: 390) {
+  .orderContainer {
+    flex-direction: column;
+  }
+}
