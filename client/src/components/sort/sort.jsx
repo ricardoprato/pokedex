@@ -37,7 +37,7 @@ const Sort = ({setPokePerPage, setCurrentPage, gen}) => {
           </select>
         </div>
         <div className={styles.orderContainer}>
-          <div>
+          <div className={styles.width}>
             <select
               name="allPokes"
               id="allPokes"

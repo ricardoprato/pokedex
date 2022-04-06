@@ -7,6 +7,10 @@
   display: flex;
   justify-content: space-between;
 }
+.width {
+  display: flex;
+  column-gap: 0.5rem;
+}
 .option {
   padding: 0.5rem;
   background-color: white;
@@ -20,7 +24,6 @@
   background-repeat: no-repeat;
   background-size: 1rem;
   background-position: 98%;
-  margin-right: 0.5rem;
 }
 .option::-ms-expand {
   display: none;
@@ -112,9 +115,13 @@
     padding-left: 0.5rem;
     padding-right: 0.5rem;
   }
+  .width {
+    column-gap: 0.2rem;
+  }
 }
-@media (max-width: 390) {
+@media (max-width: 395px) {
   .orderContainer {
-    flex-direction: column;
+    flex-wrap: wrap;
+    row-gap: 0.5rem;
   }
 }
