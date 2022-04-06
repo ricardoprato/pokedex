@@ -1,5 +1,5 @@
 import {useState} from "react";
-import {Routes, Route, Navigate} from "react-router-dom";
+import {Routes, Route} from "react-router-dom";
 import Home from "./pages/home/home";
 import LandingPage from "./pages/landingpage/Landingpage";
 import Detail from "./pages/detail/detail";
@@ -7,6 +7,7 @@ import Form from "./pages/form/form";
 import Pokedex from "./pages/pokedex/pokedex";
 import "./App.css";
 import Nav from "./components/nav/nav";
+import {Redirect} from "./components/redirect/redirect";
 function App() {
   const [active, setActive] = useState(false);
   return (
@@ -15,7 +16,7 @@ function App() {
         <>
           <Routes>
             <Route path="/" element={<LandingPage setState={setActive} />} />
-            <Route path="*" element={<Navigate to="/" replace />} />
+            <Route path="*" element={<Redirect />} />
           </Routes>
         </>
       ) : (
